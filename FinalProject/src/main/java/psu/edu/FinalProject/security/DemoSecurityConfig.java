@@ -32,9 +32,9 @@ public class DemoSecurityConfig {
     	
     	http.authorizeHttpRequests(configurer ->
     	configurer
-    				.requestMatchers("/").hasRole("EMPLOYEE")
-    				.requestMatchers("/leaders/**").hasRole("MANAGER")
-    				.requestMatchers("/systems/**").hasRole("ADMIN")    			
+    				.requestMatchers("/").hasRole("3")/**EMPLOYEE*/
+    				.requestMatchers("/leaders/**").hasRole("2")/**MANAGER*/
+    				.requestMatchers("/systems/**").hasRole("1")/**ADMIN*/ 			
     				.anyRequest().authenticated()
     			)
     			.formLogin(form ->
