@@ -1,4 +1,10 @@
 psu/edu/FinalProject/FinalProjectApplication.class
-psu/edu/FinalProject/Entity/Employee.class
 psu/edu/FinalProject/Entity/User.class
+psu/edu/FinalProject/Controller/LoginController.class
+psu/edu/FinalProject/Service/EmployeeServiceImpl.class
+psu/edu/FinalProject/security/DemoSecurityConfig.class
 psu/edu/FinalProject/Entity/Role.class
+psu/edu/FinalProject/Entity/Employee.class
+psu/edu/FinalProject/Service/EmployeeService.class
+psu/edu/FinalProject/DAO/EmployeeRepository.class
+psu/edu/FinalProject/Controller/EmployeeController.class
