@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
-import psu.edu.FinalProject.entity.Employee;
+import psu.edu.FinalProject.Entity.Employee;
 import psu.edu.FinalProject.Service.EmployeeService;
 import org.springframework.web.bind.annotation.RequestParam;
 

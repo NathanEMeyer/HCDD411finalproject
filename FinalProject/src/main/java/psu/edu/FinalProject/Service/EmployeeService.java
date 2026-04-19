@@ -2,7 +2,7 @@ package psu.edu.FinalProject.Service;
 
 import java.util.List;
 
-import psu.edu.FinalProject.entity.Employee;
+import psu.edu.FinalProject.Entity.Employee;
 
 public interface EmployeeService {
 	

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import psu.edu.FinalProject.DAO.EmployeeRepository;
-import psu.edu.FinalProject.entity.Employee;
+import psu.edu.FinalProject.Entity.Employee;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {

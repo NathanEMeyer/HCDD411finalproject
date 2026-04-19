@@ -1,0 +1,215 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>Jupiter Employee Directory | Jupiter Company</title>
+
+	<style>
+	        :root {
+	            --jup-dark: #463020;
+	            --jup-ochre: #A57E55;
+	            --jup-red: #8B3E2F;
+	            --jup-cream: #E3D3C4;
+	            --jup-bg: #FDFBFA;
+	        }
+
+	        body {
+	            background-color: var(--jup-bg);
+	            font-family: 'Inter', sans-serif;
+	            color: var(--jup-dark);
+	        }
+
+	        .header-section {
+	            background-color: var(--jup-dark);
+	            color: white;
+	            padding: 2rem 0;
+	            margin-bottom: 3rem;
+	            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+	        }
+
+	        .brand-subtext {
+	            color: var(--jup-cream);
+	            font-size: 0.75rem;
+	            letter-spacing: 2px;
+	            font-weight: 600;
+	        }
+
+	        .btn-jupiter {
+	            background-color: var(--jup-ochre);
+	            color: white;
+	            border: none;
+	            transition: all 0.3s ease;
+	            font-weight: 600;
+	        }
+
+	        .btn-jupiter:hover {
+	            background-color: var(--jup-dark);
+	            color: white;
+	            transform: translateY(-1px);
+	        }
+
+	        .table-card {
+	            background: white;
+	            border-radius: 12px;
+	            border: 1px solid rgba(165, 126, 85, 0.2);
+	            box-shadow: 0 8px 30px rgba(0,0,0,0.03);
+	            overflow: hidden;
+	            padding: 0;
+	        }
+
+	        .table {
+	            margin-bottom: 0;
+	            font-size: 0.875rem;
+	        }
+
+	        .table thead {
+	            background-color: #fcfaf8;
+	        }
+
+	        .table thead th {
+	            border-bottom: 2px solid var(--jup-cream);
+	            color: var(--jup-ochre);
+	            text-transform: uppercase;
+	            font-weight: 700;
+	            font-size: 0.7rem;
+	            letter-spacing: 0.5px;
+	            padding: 1rem;
+	        }
+
+	        .table tbody tr {
+	            transition: background-color 0.2s;
+	        }
+
+	        .table tbody tr:hover {
+	            background-color: rgba(227, 211, 196, 0.15) !important;
+	        }
+
+	        .badge-salary {
+	            background-color: rgba(139, 62, 47, 0.1);
+	            color: var(--jup-red);
+	            padding: 0.4em 0.6em;
+	            border-radius: 6px;
+	            font-weight: 700;
+	        }
+
+	        .logout-btn {
+	            background: transparent;
+	            border: 1px solid var(--jup-red);
+	            color: var(--jup-red);
+	            padding: 8px 20px;
+	            border-radius: 6px;
+	            font-weight: 600;
+	            transition: all 0.2s;
+	        }
+
+	        .logout-btn:hover {
+	            background: var(--jup-red);
+	            color: white;
+	        }
+
+	        .action-btns .btn {
+	            border-radius: 4px;
+	            font-size: 0.75rem;
+	            font-weight: 600;
+	        }
+	    </style>
+    
+</head>
+
+<body>
+
+    <div class="header-section">
+        <div class="container d-flex justify-content-between align-items-center">
+            <h2 class="mb-0">Employee Directory</h2>
+            <div class="text-end">
+                <small class="text-uppercase opacity-75 d-block" style="letter-spacing: 2px;">Jupiter Company's System</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <a th:href="@{/emplrec/showFormForAdd}" class="btn btn-psu-primary px-4 shadow-sm" sec:authorize="hasAnyRole('MANAGER', 'DIRECTOR', 'ADMIN')">
+                    <i class="bi bi-person-plus"></i> Add New Employee
+                </a>
+                
+            </div>
+            
+            <span class="text-muted small" th:text="${'Total Records: ' + emplrec.size()}"></span>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th class="ps-4">First Name</th>
+                        <th>Last Name</th>
+                        <th>Start Date</th>
+                        <th>Start Salary</th>
+                        <th>Contract Signed</th>
+                        <th>SSN</th>
+                        <th>Birth Date</th>
+						<th>Phone Number</th>
+						<th>Emergency Name</th>
+						<th>Emergency Phone</th>
+						<th>Created At</th>
+						<th>Updated At</th>
+                        <th class="action-btns">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="tempEmplRec : ${emplrec}">
+                        <td class="ps-4 fw-semibold" th:text="${tempEmplRec.firstName}"></td>
+                        <td th:text="${tempEmplRec.lastName}"></td>
+                        <td>
+                            <span class="text-muted" th:text="${tempEmplRec.startDate}"></span>
+                        </td>
+                       <td class="fw-bold text-dark" th:text="${#numbers.formatCurrency(tempEmplRec.startSalary)}"></td>
+                        <td th:text="${tempEmplRec.contractSigned}"></td>
+                        <td th:text="${tempEmplRec.ssnEncrypted}"></td>
+                        <td>
+                            <span class="badge-dept" th:text="${tempEmplRec.birthDate}"></span>
+                        </td>
+						<td class="ps-4 fw-semibold" th:text="${tempEmplRec.phoneNumber}"></td>
+						<td class="ps-4 fw-semibold" th:text="${tempEmplRec.emergencyContactName}"></td>
+						<td class="ps-4 fw-semibold" th:text="${tempEmplRec.emergencyContactPhone}"></td>
+						<td class="ps-4 fw-semibold" th:text="${tempEmplRec.createdAt}"></td>
+						<td class="ps-4 fw-semibold" th:text="${tempEmplRec.updatedAt}"></td>
+                        <td class="action-btns">
+                            <div class="btn-group shadow-sm">
+                                <a th:href="@{/jupemplo/showFormForUpdate(empno=${tempEmplRec.empno})}"
+                                   class="btn btn-outline-secondary btn-sm" sec:authorize="hasAnyRole('MANAGER', ADMIN')">
+                                    Edit
+                                </a>
+                                <a th:href="@{/jupemplo/delete(empno=${tempEmplRec.empno})}"
+                                   class="btn btn-danger btn-sm"
+                                   onclick="if (!(confirm('Confirm deletion of this record?'))) return false" sec:authorize="hasAnyRole('ADMIN')">
+                                    Delete
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+		
+		<div class="logout-form">
+		            <form th:action="@{/logout}" method="POST">
+		                <input type="submit" value="Sign Out" class="logout-btn" />
+		            </form>
+		        </div>
+
+        <div class="mt-5 text-center text-muted small pb-4">
+           &copy; 2026 The Jupiter Company | Internal Use Only
+        </div>
+    </div>
+
+</body>
+</html>
