@@ -49,7 +49,7 @@ public class User {
     public void setUsername(String username)      { this.username = username; }
 
     public String getPasswordHash()               { return passwordHash; }
-    public void setPasswordHash(String hash)      { this.passwordHash = hash; }
+    public void setPasswordHash(String passwordHash)      { this.passwordHash = passwordHash; }
 
     public Role getRole()                         { return role; }
     public void setRole(Role role)                { this.role = role; }

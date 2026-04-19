@@ -112,10 +112,10 @@ public class Employee {
     public void setPhoneNumber(String phoneNumber)        { this.phoneNumber = phoneNumber; }
 
     public String getEmergencyContactName()               { return emergencyContactName; }
-    public void setEmergencyContactName(String n)         { this.emergencyContactName = n; }
+    public void setEmergencyContactName(String emergencyContactName)         { this.emergencyContactName = emergencyContactName; }
 
     public String getEmergencyContactPhone()              { return emergencyContactPhone; }
-    public void setEmergencyContactPhone(String p)        { this.emergencyContactPhone = p; }
+    public void setEmergencyContactPhone(String emergencyContactPhone)        { this.emergencyContactPhone = emergencyContactPhone; }
 
     public LocalDateTime getCreatedAt()                   { return createdAt; }
     public LocalDateTime getUpdatedAt()                   { return updatedAt; }
