@@ -111,6 +111,7 @@
 
     <div class="navbar-jup">
         <div class="container">
+			<img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Jupiter_and_its_shrunken_Great_Red_Spot.jpg" alt="Jupiter" class="jupiter-logo">
             <span class="h4 mb-0">Employee Directory</span>
         </div>
     </div>
@@ -125,7 +126,7 @@
                     </div>
                     <div class="card-body p-4">
                         
-                        <form th:action="@{/emplrec/save}" th:object="${emplrec}" method="POST">
+                        <form th:action="@{/jupemplo/save}" th:object="${jupemplo}" method="POST">
                             
                             <input type="hidden" th:field="*{employeeId}" />            
 
@@ -150,10 +151,7 @@
 
                                 <div class="col-md-4">
                                     <label class="form-label">Contract Signed</label>
-                                    <div class="form-check">
-                                        <input type="checkbox" th:field="*{contractSigned}" class="form-check-input" id="contractSigned">
-                                        <label class="form-check-label" for="contractSigned">Yes</label>
-                                    </div>
+                                    <input type="text" th:field="*{contractSigned}" class="form-control" placeholder="true/false">
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label">SSN</label>
@@ -181,7 +179,7 @@
                                 <div class="col-12 mt-4">
                                     <button type="submit" class="btn btn-psu">Save Employee Record</button>
                                     <div class="mt-3">
-                                        <a th:href="@{/emplrec/list}" class="back-link">&larr; Back to Employee List</a>
+                                        <a th:href="@{/jupemplo/list}" class="back-link">&larr; Back to Employee List</a>
                                     </div>
                                 </div>
                             </div>
