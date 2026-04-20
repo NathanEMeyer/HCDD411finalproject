@@ -20,9 +20,9 @@ public class DemoSecurityConfig {
 	{
 		JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
 		
-		jdbcUserDetailsManager.setUsersByUsernameQuery("select user_id,password_hash,is_active from users where user_id =?");
+		jdbcUserDetailsManager.setUsersByUsernameQuery("select username,password_hash,is_active from users where username =?");
 		
-		jdbcUserDetailsManager.setAuthoritiesByUsernameQuery("select role_name, role_id from roles where role_name =?");
+		jdbcUserDetailsManager.setAuthoritiesByUsernameQuery("select employee_user, role_name from roles where employee_user =?");
 		
 		return jdbcUserDetailsManager;
 	}
@@ -32,12 +32,9 @@ public class DemoSecurityConfig {
     	
     	http.authorizeHttpRequests(configurer ->
     	configurer
-    				.requestMatchers("/").hasRole("3")/**EMPLOYEE*/
-					.requestMatchers("/").hasRole("2"))/**MANAGER*/
-					.requestMatchers("/").hasRole("1")/**ADMIN*/ 
-    				.requestMatchers("/save").hasRole("2")/**MANAGER*/
-					.requestMatchers("/save").hasRole("1")/**ADMIN*/ 
-    				.requestMatchers("/delete").hasRole("1")/**ADMIN*/ 			
+    				.requestMatchers("/").hasAnyRole("MANAGER","EMPLOYEE","ADMIN")
+    				.requestMatchers("/save").hasAnyRole("MANAGER","ADMIN")
+    				.requestMatchers("/delete").hasRole("ADMIN") 
     				.anyRequest().authenticated()
     			)
     			.formLogin(form ->

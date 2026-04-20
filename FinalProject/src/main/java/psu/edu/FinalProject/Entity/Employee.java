@@ -14,35 +14,35 @@ public class Employee {
     @Column(name = "employee_id")
     private Integer employeeId;
 
-    @Column(name = "first_name", nullable = false, length = 100)
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "last_name", nullable = false, length = 100)
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "start_date", nullable = false)
+    @Column(name = "start_date")
     private LocalDate startDate;
 
-    @Column(name = "start_salary", nullable = false, precision = 12, scale = 2)
+    @Column(name = "start_salary")
     private BigDecimal startSalary;
 
-    @Column(name = "contract_signed", nullable = false)
+    @Column(name = "contract_signed")
     private Boolean contractSigned = false;
 
     // Stored AES-encrypted — encrypt/decrypt in the service layer
-    @Column(name = "ssn_encrypted", nullable = false, length = 512)
+    @Column(name = "ssn_encrypted")
     private String ssnEncrypted;
 
-    @Column(name = "birthdate", nullable = false)
+    @Column(name = "birthdate")
     private LocalDate birthdate;
 
-    @Column(name = "phone_number", nullable = false, length = 20)
+    @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "emergency_contact_name", nullable = false, length = 200)
+    @Column(name = "emergency_contact_name")
     private String emergencyContactName;
 
-    @Column(name = "emergency_contact_phone", nullable = false, length = 20)
+    @Column(name = "emergency_contact_phone")
     private String emergencyContactPhone;
 
     @Column(name = "created_at", updatable = false)
@@ -51,16 +51,7 @@ public class Employee {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @PrePersist
-    protected void onCreate() {
-        createdAt = LocalDateTime.now();
-        updatedAt = LocalDateTime.now();
-    }
 
-    @PreUpdate
-    protected void onUpdate() {
-        updatedAt = LocalDateTime.now();
-    }
 
     // --- Constructors ---
 

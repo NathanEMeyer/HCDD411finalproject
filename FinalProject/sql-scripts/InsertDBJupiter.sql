@@ -1,4 +1,5 @@
 -- Sample employee records
+
 INSERT INTO employees (
     first_name, last_name, start_date, start_salary,
     contract_signed, ssn_encrypted, birthdate,
@@ -9,7 +10,12 @@ INSERT INTO employees (
     ('Priya',   'Sharma',  '2023-01-10', 65000.00, 1, 'ENCRYPTED_SSN_3', '1993-04-17', '555-0301', 'Raj Sharma',   '555-0302');
 
 -- User accounts (passwords: admin123 / manager123 / emp123)
-INSERT INTO users (username, password_hash, role_id, employee_id) VALUES
-    ('admin',       '$2a$12$Pt.Z8zWLZkzS1QxFLB/pue2SdIOB3S3j1/e4mq5qlYEFiO5t3Ck0m', 1, NULL),
-    ('mgr.chen',    '$2a$12$XKUVvRJbXdl7pHFHiJO4EOKECCXFXaJGfQ9EOOJ6Wd7T.Ye/UZfmy', 2, 2),
-    ('a.reyes',     '$2a$12$9nFmUj8RX2PFqDlYGEi.m.bBkF7IcxX3WBr3fC5Tl2LvgHk8k6JKi', 3, 1);
+INSERT INTO users (username, password_hash, employee_id) VALUES
+    ('admin',       '{bcrypt}$2a$10$/V4RHi1TyxTQTuPU7VQvXuzG622ZUBVnMedFXBbgHo53X9Hen0hAO', NULL),
+    ('mgr.chen',    '{bcrypt}$2a$10$VUjrs8ZxTJTcQFmGQaNyuuAItYNrx.VlUVgfn2vozjgM/VPN.wIDq', 2),
+    ('a.reyes',     '{bcrypt}$2a$10$Idceh9bq4w0AUWVmGdESLOWKHbnDClC6BRPXEzxzAXzLp6hYYL0Sq', 1);
+
+INSERT INTO roles(employee_user, role_name) VALUES
+    ('admin','ROLE_ADMIN'),
+    ('mgr.chen','ROLE_MANAGER'),
+    ('a.reyes','ROLE_EMPLOYEE');

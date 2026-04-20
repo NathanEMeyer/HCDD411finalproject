@@ -66,7 +66,7 @@ public class EmployeeController {
 		employeeService.save(theEmployee);
 		
 		// use a redirect to prevent duplicate submissions
-		return "redirect:/employees/list";
+		return "redirect:/employees/jupiter-homepage";
 	}
 	
 	@GetMapping("/delete")
@@ -76,7 +76,7 @@ public class EmployeeController {
         employeeService.deleteById(theId);
         
 		// redirect to /employees/list
-        return "redirect:/employees/list";
+        return "redirect:/employees/jupiter-homepage";
     }
 	
 }
