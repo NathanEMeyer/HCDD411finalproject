@@ -1,13 +1,15 @@
 package psu.edu.FinalProject.security;
 
+import java.util.Map;
+
 import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
@@ -16,15 +18,22 @@ import org.springframework.security.web.SecurityFilterChain;
 public class DemoSecurityConfig {
 	
 	@Bean
-	public UserDetailsManager userDetailsManger(DataSource dataSource)
-	{
+	public UserDetailsManager userDetailsManger(DataSource dataSource) {
 		JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
-		
-		jdbcUserDetailsManager.setUsersByUsernameQuery("select username,password_hash,is_active from users where username =?");
-		
-		jdbcUserDetailsManager.setAuthoritiesByUsernameQuery("select employee_user, role_name from roles where employee_user =?");
-		
+
+		jdbcUserDetailsManager.setUsersByUsernameQuery(
+			"SELECT username, password_hash, is_active FROM users WHERE username = ?");
+
+		jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
+			"SELECT u.username, r.role_name FROM users u " +
+			"JOIN roles r ON u.username = r.employee_user WHERE u.username = ?");
+
 		return jdbcUserDetailsManager;
+	}
+
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new DelegatingPasswordEncoder("bcrypt", Map.of("bcrypt", new BCryptPasswordEncoder()));
 	}
 	
     @Bean
@@ -33,14 +42,16 @@ public class DemoSecurityConfig {
     	http.authorizeHttpRequests(configurer ->
     	configurer
     				.requestMatchers("/").hasAnyRole("MANAGER","EMPLOYEE","ADMIN")
-    				.requestMatchers("/save").hasAnyRole("MANAGER","ADMIN")
-    				.requestMatchers("/delete").hasRole("ADMIN") 
+    				.requestMatchers("/emplrec/save").hasAnyRole("MANAGER","ADMIN")
+    				.requestMatchers("/emplrec/delete").hasRole("ADMIN") 
     				.anyRequest().authenticated()
     			)
     			.formLogin(form ->
     					form
     						.loginPage("/showMyLoginPage")
     						.loginProcessingUrl("/authenticateTheUser")
+    						.defaultSuccessUrl("/", true)
+    						.failureUrl("/showMyLoginPage?error=true")
     						.permitAll()
     			)
     			.logout(logout -> logout.permitAll()    					

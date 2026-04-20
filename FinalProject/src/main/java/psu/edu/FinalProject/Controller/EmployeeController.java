@@ -24,59 +24,64 @@ public class EmployeeController {
     }
 	 
 	@GetMapping("/")
+    public String redirectToList() {
+        return "redirect:/emplrec/list";
+    }
+    
+	@GetMapping("/emplrec/list")
     public String listEmployees(Model theModel) {
         
 		// get the employees from db
         List<Employee> theEmployees = employeeService.findAll();
         
         // add to the spring model
-        theModel.addAttribute("employees", theEmployees);
-        return "employees/jupiter-homepage";
+        theModel.addAttribute("emplrec", theEmployees);
+        return "jupiter-homepage";
     }
 	
-	@GetMapping("/showFormForAdd")
+	@GetMapping("/emplrec/showFormForAdd")
 	public String showFormForAdd(Model theModel) {
 		
 		// create model attribute to bind form data
 		Employee theEmployee = new Employee();
 		
-		theModel.addAttribute("employee", theEmployee);
+		theModel.addAttribute("emplrec", theEmployee);
 		
-		return "employees/employee-form";
+		return "employee-form";
 	}
 	
-	@GetMapping("/showFormForUpdate")
+	@GetMapping("/emplrec/showFormForUpdate")
 	public String showFormForUpdate(@RequestParam("employeeId") int theId, Model theModel) {
 		
 		// get the employee from the service
 		Employee theEmployee = employeeService.findById(theId);
 		
 		//set employee as a model attribute to pre-populate the form
-		theModel.addAttribute("employee", theEmployee);
+		theModel.addAttribute("emplrec", theEmployee);
 		
 		//send over to our form
 		
-		return "employees/employee-form";
+		return "employee-form";
 	}
 	
-	@PostMapping("/save")
-	public String saveEmployee(@ModelAttribute("employee") Employee theEmployee) {
+	@PostMapping("/emplrec/save")
+	public String saveEmployee(@ModelAttribute("emplrec") Employee theEmployee) {
 		
 		//save the employee
 		employeeService.save(theEmployee);
 		
 		// use a redirect to prevent duplicate submissions
-		return "redirect:/employees/jupiter-homepage";
+		return "redirect:/emplrec/list";
 	}
 	
-	@GetMapping("/delete")
+	@GetMapping("/emplrec/delete")
     public String delete(@RequestParam("employeeId") int theId) {
         
 		// delete the employee
         employeeService.deleteById(theId);
         
-		// redirect to /employees/list
-        return "redirect:/employees/jupiter-homepage";
+		// redirect to the root dashboard
+        return "redirect:/emplrec/list";
     }
 	
 }

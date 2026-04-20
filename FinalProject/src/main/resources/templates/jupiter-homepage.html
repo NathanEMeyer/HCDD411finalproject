@@ -177,7 +177,7 @@
                         <td th:text="${tempEmplRec.contractSigned}"></td>
                         <td th:text="${tempEmplRec.ssnEncrypted}"></td>
                         <td>
-                            <span class="badge-dept" th:text="${tempEmplRec.birthDate}"></span>
+                            <span class="badge-dept" th:text="${tempEmplRec.birthdate}"></span>
                         </td>
 						<td class="ps-4 fw-semibold" th:text="${tempEmplRec.phoneNumber}"></td>
 						<td class="ps-4 fw-semibold" th:text="${tempEmplRec.emergencyContactName}"></td>
@@ -186,11 +186,11 @@
 						<td class="ps-4 fw-semibold" th:text="${tempEmplRec.updatedAt}"></td>
                         <td class="action-btns">
                             <div class="btn-group shadow-sm">
-                                <a th:href="@{/jupemplo/showFormForUpdate(employeeId=${tempEmplRec.employeeId})}"
-                                   class="btn btn-outline-secondary btn-sm" sec:authorize="hasAnyRole('MANAGER', ADMIN')">
+                                <a th:href="@{/emplrec/showFormForUpdate(employeeId=${tempEmplRec.employeeId})}"
+                                   class="btn btn-outline-secondary btn-sm" sec:authorize="hasAnyRole('MANAGER', 'ADMIN')">
                                     Edit
                                 </a>
-                                <a th:href="@{/jupemplo/delete(employeeId=${tempEmplRec.employeeId})}"
+                                <a th:href="@{/emplrec/delete(employeeId=${tempEmplRec.employeeId})}"
                                    class="btn btn-danger btn-sm"
                                    onclick="if (!(confirm('Confirm deletion of this record?'))) return false" sec:authorize="hasAnyRole('ADMIN')">
                                     Delete
