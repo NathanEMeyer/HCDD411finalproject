@@ -43,15 +43,15 @@ public class UserServiceImpl implements UserService {
 		User user = new User();
 
 		// assign user details to the user object
-		user.setUserName(webUser.getUserName());
-		user.setPassword(passwordEncoder.encode(webUser.getPassword()));
-		user.setFirstName(webUser.getFirstName());
-		user.setLastName(webUser.getLastName());
-		user.setEmail(webUser.getEmail());
-		user.setEnabled(true);
+		user.setUsername(webUser.getUserName());
+		user.setPasswordHash(passwordEncoder.encode(webUser.getPassword()));
+		//user.setFirstName(webUser.getFirstName());
+		//user.setLastName(webUser.getLastName());
+		//user.setEmail(webUser.getEmail());
+		user.setIsActive(true);
 
 		// give user default role of "employee"
-		user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_EMPLOYEE")));
+		user.setRole(roleDao.findRoleByName("ROLE_EMPLOYEE"));
 
 		// save user in the database
 		userDao.save(user);
@@ -65,19 +65,18 @@ public class UserServiceImpl implements UserService {
 			throw new UsernameNotFoundException("Invalid username or password.");
 		}
 
-		Collection<SimpleGrantedAuthority> authorities = mapRolesToAuthorities(user.getRoles());
+		Collection<SimpleGrantedAuthority> authorities = mapRolesToAuthorities(user.getRole());
 
-		return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(),
+		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPasswordHash(),
 				authorities);
 	}
 
-	private Collection<SimpleGrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
+	private Collection<SimpleGrantedAuthority> mapRolesToAuthorities(Role role) {
 		Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
-		for (Role tempRole : roles) {
-			SimpleGrantedAuthority tempAuthority = new SimpleGrantedAuthority(tempRole.getName());
+			SimpleGrantedAuthority tempAuthority = new SimpleGrantedAuthority(role.getRoleName());
 			authorities.add(tempAuthority);
-		}
+		
 
 		return authorities;
 	}
