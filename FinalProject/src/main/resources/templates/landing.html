@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jupiter Company | Corporate Portal</title>
+	<style>
+	        :root {
+	            /* Jupiter Command Palette */
+	            --space-black: #05070a;
+	            --jupiter-core: #2d1e17;
+	            --jupiter-gold: #c5a36b;
+	            --jupiter-tan: #4a3b31;
+	            --text-glow: rgba(255, 255, 255, 0.9);
+	            --glass-bg: rgba(255, 255, 255, 0.04);
+	        }
+
+	        body {
+	            margin: 0;
+	            padding: 0;
+	            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+	            background: radial-gradient(circle at 50% 110%, var(--jupiter-tan) 0%, var(--space-black) 70%);
+	            background-attachment: fixed;
+	            color: var(--text-glow);
+	            min-height: 100vh;
+	            display: flex;
+	            flex-direction: column;
+	        }
+
+	        /* Subtle horizontal gas-giant bands */
+	        body::before {
+	            content: "";
+	            position: fixed;
+	            top: 0; left: 0; width: 100%; height: 100%;
+	            background: repeating-linear-gradient(
+	                0deg,
+	                transparent,
+	                transparent 80px,
+	                rgba(197, 163, 107, 0.02) 81px,
+	                transparent 82px
+	            );
+	            pointer-events: none;
+	            z-index: 0;
+	        }
+
+	        header {
+	            padding: 4rem 10% 2rem;
+	            text-align: center;
+	            z-index: 1;
+	        }
+
+	        header h1 {
+	            margin: 0;
+	            font-size: 2.5rem;
+	            font-weight: 200;
+	            letter-spacing: 6px;
+	            text-transform: uppercase;
+	            color: var(--jupiter-gold);
+	            text-shadow: 0 0 20px rgba(197, 163, 107, 0.3);
+	        }
+
+	        .container {
+	            max-width: 900px;
+	            margin: 0 auto 4rem;
+	            background: var(--glass-bg);
+	            backdrop-filter: blur(15px);
+	            padding: 3rem;
+	            border-radius: 20px;
+	            border: 1px solid rgba(255, 255, 255, 0.1);
+	            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+	            text-align: center;
+	            z-index: 1;
+	        }
+
+	        .hero-img {
+	            max-width: 100%;
+	            height: auto;
+	            border-radius: 12px;
+	            margin: 2.5rem 0;
+	            border: 1px solid rgba(197, 163, 107, 0.3);
+	            box-shadow: 0 0 30px rgba(0,0,0,0.4);
+	            filter: grayscale(20%) contrast(1.1);
+	        }
+
+	        h2 {
+	            font-weight: 300;
+	            letter-spacing: 2px;
+	            color: #fff;
+	            margin-bottom: 0.5rem;
+	        }
+
+	        .divider {
+	            width: 80px;
+	            height: 2px;
+	            background: var(--jupiter-gold);
+	            margin: 1.5rem auto 2.5rem;
+	            box-shadow: 0 0 10px var(--jupiter-gold);
+	        }
+
+	        p {
+	            font-size: 1.1rem;
+	            color: #b0b0b0;
+	            max-width: 750px;
+	            margin: 1.5rem auto;
+	            line-height: 1.8;
+	        }
+
+	        .btn-secure {
+	            display: inline-block;
+	            background: linear-gradient(135deg, var(--jupiter-gold) 0%, #8e7a56 100%);
+	            color: #1a1a1a;
+	            padding: 16px 40px;
+	            text-decoration: none;
+	            font-weight: bold;
+	            border-radius: 50px;
+	            text-transform: uppercase;
+	            letter-spacing: 2px;
+	            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	            margin-top: 2rem;
+	            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+	        }
+
+	        .btn-secure:hover {
+	            transform: translateY(-5px);
+	            box-shadow: 0 15px 30px rgba(197, 163, 107, 0.4);
+	            filter: brightness(1.1);
+	        }
+
+	        footer {
+	            margin-top: auto;
+	            padding: 2rem;
+	            text-align: center;
+	            font-size: 0.75rem;
+	            color: #555;
+	            text-transform: uppercase;
+	            letter-spacing: 3px;
+	        }
+
+	        strong {
+	            color: var(--jupiter-gold);
+	        }
+	    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Jupiter Company Enterprise Solutions</h1>
+</header>
+
+<div class="container">
+    <h2>Welcome to the Project Portal</h2>
+    <hr style="width: 50px; border: 2px solid var(--psu-blue); margin-bottom: 2rem;">
+
+    <p>
+        Welcome to the official landing page for our <strong>Jupiter Company Airline Team</strong>. 
+        This platform serves as our central hub for our employees and people who visit our website.
+    </p>
+
+    <img src="images/jupiter.jpg" alt="Project Jupiter" class="hero-img">
+
+    <p>
+        <em>Note: This public landing page is accessible to all visitors. Detailed project documentation, 
+        sprints, and employee resources are restricted to authorized personnel only.</em>
+    </p>
+
+    <a th:href="@{/employees}" class="btn-secure">Access Secure Employee Site</a>
+</div>
+
+<footer>
+    <p>&copy; 2026 The Jupiter Company | Jupiter Company</p>
+</footer>
+
+</body>
+</html>
