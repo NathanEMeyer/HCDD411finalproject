@@ -25,7 +25,7 @@ public class EmployeeController {
 	 
 	@GetMapping("/")
     public String redirectToList() {
-        return "redirect:/emplrec/list";
+        return "landing";
     }
     
 	@GetMapping("/emplrec/list")
