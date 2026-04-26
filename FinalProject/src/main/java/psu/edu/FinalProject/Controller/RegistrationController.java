@@ -46,7 +46,7 @@ public class RegistrationController {
 		
 		theModel.addAttribute("webUser", new WebUser());
 		
-		return "register/registration-form";
+		return "registration-form";
 	}
 
 	@PostMapping("/processRegistrationForm")
@@ -70,7 +70,7 @@ public class RegistrationController {
 			theModel.addAttribute("registrationError", "User name already exists.");
 
 			logger.warning("User name already exists.");
-        	return "register/registration-form";
+        	return "registration-form";
         }
         
         // create user account and store in the database
@@ -81,6 +81,6 @@ public class RegistrationController {
 		// place user in the web http session for later use
 		session.setAttribute("user", theWebUser);
 
-        return "register/registration-confirmation";
+        return "registration-confirmation";
 	}
 }
