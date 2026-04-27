@@ -5,6 +5,8 @@ import psu.edu.FinalProject.DAO.UserDao;
 import psu.edu.FinalProject.Entity.Role;
 import psu.edu.FinalProject.Entity.User;
 import psu.edu.FinalProject.user.WebUser;
+import psu.edu.FinalProject.Service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,13 +25,13 @@ public class UserServiceImpl implements UserService {
 
 	private RoleDao roleDao;
 
-	private BCryptPasswordEncoder passwordEncoder;
+	//private BCryptPasswordEncoder passwordEncoder;
 
 	@Autowired
-	public UserServiceImpl(UserDao userDao, RoleDao roleDao, BCryptPasswordEncoder passwordEncoder) {
+	public UserServiceImpl(UserDao userDao, RoleDao roleDao) {
 		this.userDao = userDao;
 		this.roleDao = roleDao;
-		this.passwordEncoder = passwordEncoder;
+		//this.passwordEncoder = passwordEncoder;
 	}
 
 	@Override
@@ -44,16 +46,16 @@ public class UserServiceImpl implements UserService {
 
 		// assign user details to the user object
 		user.setUsername(webUser.getUserName());
-		user.setPasswordHash(passwordEncoder.encode(webUser.getPassword()));
+		user.setPasswordHash(new BCryptPasswordEncoder().encode(webUser.getPassword()));
 		//user.setFirstName(webUser.getFirstName());
 		//user.setLastName(webUser.getLastName());
 		//user.setEmail(webUser.getEmail());
 		user.setIsActive(true);
 
-		// give user default role of "employee"
+		
 		user.setRole(roleDao.findRoleByName("ROLE_EMPLOYEE"));
 
-		// save user in the database
+
 		userDao.save(user);
 	}
 
