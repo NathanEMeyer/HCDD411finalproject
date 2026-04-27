@@ -41,16 +41,17 @@ public class DemoSecurityConfig {
     	
     	http.authorizeHttpRequests(configurer ->
     	configurer
-    				.requestMatchers("/").hasAnyRole("MANAGER","EMPLOYEE","ADMIN")
+    				.requestMatchers("/").permitAll()
     				.requestMatchers("/emplrec/save").hasAnyRole("MANAGER","ADMIN")
     				.requestMatchers("/emplrec/delete").hasRole("ADMIN") 
+    				.requestMatchers("/emplrec/list").hasAnyRole("MANAGER","EMPLOYEE","ADMIN")
     				.anyRequest().authenticated()
     			)
     			.formLogin(form ->
     					form
     						.loginPage("/showMyLoginPage")
     						.loginProcessingUrl("/authenticateTheUser")
-    						.defaultSuccessUrl("/", true)
+    						.defaultSuccessUrl("/emplrec/list", true)
     						.failureUrl("/showMyLoginPage?error=true")
     						.permitAll()
     			)
