@@ -135,7 +135,7 @@
                     </div>
                     <div class="card-body p-4">
                         
-                        <form th:action="@{/jupemplo/save}" th:object="${jupemplo}" method="POST">
+                        <form th:action="@{/emplrec/save}" th:object="${emplrec}" method="POST">
                             
                             <input type="hidden" th:field="*{employeeId}" />            
 
@@ -188,7 +188,7 @@
                                 <div class="col-12 mt-4">
                                     <button type="submit" class="btn btn-psu">Save Employee Record</button>
                                     <div class="mt-3">
-                                        <a th:href="@{/jupemplo/list}" class="back-link">&larr; Back to Employee List</a>
+                                        <a th:href="@{/emplrec/list}" class="back-link">&larr; Back to Employee List</a>
                                     </div>
                                 </div>
                             </div>

@@ -103,6 +103,15 @@
 	        .back-link:hover {
 	            color: var(--jup-dark);
 	        }
+
+			.jupiter-logo {
+	            width: 50px;
+	            height: 50px;
+	            border-radius: 50%;
+	            object-fit: cover;
+	            border: 2px solid var(--jup-cream);
+	            margin-right: 15px;
+        	}
 	    </style>
 
 </head>
@@ -111,6 +120,7 @@
 
     <div class="navbar-jup">
         <div class="container">
+			<img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Jupiter_and_its_shrunken_Great_Red_Spot.jpg" alt="Jupiter" class="jupiter-logo">
             <span class="h4 mb-0">Employee Directory</span>
         </div>
     </div>
@@ -150,10 +160,7 @@
 
                                 <div class="col-md-4">
                                     <label class="form-label">Contract Signed</label>
-                                    <div class="form-check">
-                                        <input type="checkbox" th:field="*{contractSigned}" class="form-check-input" id="contractSigned">
-                                        <label class="form-check-label" for="contractSigned">Yes</label>
-                                    </div>
+                                    <input type="text" th:field="*{contractSigned}" class="form-control" placeholder="true/false">
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label">SSN</label>

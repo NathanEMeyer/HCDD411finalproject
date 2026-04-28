@@ -6,13 +6,12 @@ import psu.edu.FinalProject.Entity.User;
 import psu.edu.FinalProject.Service.UserService;
 import psu.edu.FinalProject.user.WebUser;
 import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -51,7 +50,7 @@ public class RegistrationController {
 
 	@PostMapping("/processRegistrationForm")
 	public String processRegistrationForm(
-			@Valid @ModelAttribute("webUser") WebUser theWebUser,
+			@Validated @ModelAttribute("webUser") WebUser theWebUser,
 			BindingResult theBindingResult,
 			HttpSession session, Model theModel) {
 
